@@ -34,7 +34,13 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  'post /customer:first_name:last_name:birth_date': 'CustomerController.create',
+  'put /update': 'CustomerController.update',
+  'delete /delete': 'CustomerController.delete',
+  'get /display': 'CustomerController.display'
+
 
   /***************************************************************************
   *                                                                          *

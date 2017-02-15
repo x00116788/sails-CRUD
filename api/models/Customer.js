@@ -8,7 +8,12 @@
 module.exports = {
 
   attributes: {
+    id: 'INTEGER',
+    first_name: 'STRING',
+    lastName: 'STRING',
+    birth_date: 'DATE',
 
+    required: true
   }
 };
 
