@@ -11,29 +11,33 @@ module.exports = {
         try{
             Customer.create(req.allParams(),function(err,person){
 							if (err) return res.send(err,500);
-							res.end('created sucessfully ' + person.toString());
+							res.json('created sucessfully ' + person.toString());
 						});
-
-    //  res.json(req.allParams());
-
         }
     catch(err){
 			return new Error(err);
     };
   },
 
-	joker: function(req, res){
-		var first = req.param('first');
-		var last = req.param('last');
+	joker: function(req, res, next){
 
-		res.redirect('http://api.icndb.com/jokes/random?firstName=' +first + '&lastName=' + last);
+		try {
+		Customer.findOne(req.param('id'), function(err, person){
+				// if (person === undefined) return res.notFound();
+        if (err) return Error(err);
+				else{
+
+					var first = (person.first_name);
+					var	last = (person.last_name);
+					res.redirect('http://api.icndb.com/jokes/random?firstName=' +first + '&lastName=' + last);
+					res.json(person);
+				}
+
+			})
+		} catch (err) {
+			return new Error(err);
+		};
 	},
-
-  update: function(req, res){
-      //res.redirect('http://api.icndb.com/jokes/random?firstName=John&lastName=adams');
-      return res.send('Update Completed');
-
-  },
 
   delete: function(req, res){
 		var id = req.param('id', null);
@@ -42,17 +46,11 @@ module.exports = {
 						person.destroy();
 						res.end('customer ' + id + 'deleted');
 				})
-		//return res.send('Customer List');
+
 	}
 	catch(err){
 		return new Error(err);
 	};
-      //return res.send('Customer deleted');
-  },
-
-  // display: function(req, res){
-	//
-	//
-  // }
+      
 
 };
