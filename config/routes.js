@@ -36,10 +36,17 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'post /customer:first_name:last_name:birth_date': 'CustomerController.create',
-  'put /update': 'CustomerController.update',
-  'delete /delete': 'CustomerController.delete',
-  'get /display': 'CustomerController.display'
+  'post /customer/create:id:first:last:birth_date': 'CustomersController.create',
+  'put /update': 'CustomersController.update',
+  'get /customer/joker:first:last': 'CustomerController.joker',
+  'delete /customer/delete:id': 'CustomersController.delete',
+  'get /display/:id': 'CustomersController.display'
+
+
+  //'post /customer:first_name:last_name:birth_date': 'CustomerController.create',
+  //'put /update': 'CustomerController.update',
+//  'delete /delete': 'CustomerController.delete',
+//  'get /display': 'CustomerController.display'
 
 
   /***************************************************************************

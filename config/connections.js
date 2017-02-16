@@ -28,11 +28,29 @@ module.exports.connections = {
   * Installed by default.                                                    *
   *                                                                          *
   ***************************************************************************/
-  localDiskDb: {
-    adapter: 'sails-disk'
-  },
-  memory: {
+  // localDiskDb: {
+  //   adapter: 'sails-disk'
+  // },
+  /*memory: {
     adapter: 'sails-memory'
+  }*/
+
+  sqlitedb: {
+    /**
+     * Database instance type. Specify whether to store the database on disk
+     * or in memory.
+     */
+    adapter: 'waterline-sqlite3', // or 'memory'
+
+    /**
+     * Location of file if type='disk'
+     */
+    filename: './tmp/db.sqlite',
+
+    /**
+     * Set to true to output SQL queries
+     */
+    debug: false
   }
 
   /***************************************************************************
