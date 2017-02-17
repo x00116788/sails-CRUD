@@ -50,7 +50,7 @@ module.exports.connections = {
     /**
      * Set to true to output SQL queries
      */
-    debug: false
+    debug: true
   }
 
   /***************************************************************************

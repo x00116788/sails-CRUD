@@ -12,6 +12,7 @@ send a POST to http://localhost:1337/customer/create?<id,first_name,last_name,bi
 
 to retrieve all Customers in DB
 Make a GET to http://localhost:1337/customer
+
 to retrieve a single Customer from DB
 Make a GET to http://localhost:1337/customer?<id>
 

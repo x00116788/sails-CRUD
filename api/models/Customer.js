@@ -8,12 +8,13 @@
 module.exports = {
 
   attributes: {
-    id: 'INTEGER',
-    first_name: 'STRING',
-    lastName: 'STRING',
-    birth_date: 'DATE',
-
-    required: true
+    id: {type: 'INTEGER',
+        primaryKey: true },
+    first_name: {type:'STRING',
+                required: true},
+    last_name: {type:'STRING',
+              required: true},
+    birth_date: {type: 'STRING',
+                required: true}
   }
 };
-
