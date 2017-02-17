@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#create a customer
-curl -X "POST" -d "id=3&first_name=me&last_name=pu&birth_date=1996-10-15" localhost:1337/customer/create
-
 #find and display one customer
 echo "__________"
 echo "displaying one"

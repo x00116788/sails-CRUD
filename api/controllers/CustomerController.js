@@ -10,7 +10,7 @@ module.exports = {
 	create: function (req, res) {
         try{
             Customer.create(req.allParams(),function(err,person){
-							if (err) return res.send(err,500);
+							//if (err) return res.send(err,500);
 							res.json('created sucessfully ' + person.first_name);
 						});
         }
@@ -18,6 +18,18 @@ module.exports = {
 		res.end('invalid details entered');
     };
   },
+
+	update: function (req, res){
+		var id = req.param('id');
+		try{
+			 	Customer.update(req.allPparams);
+						res.end('Update was sucessful For ' + id);
+        }
+    catch(err){
+		res.end('invalid details entered');
+    };
+  },
+	
 
 	joker: function(req, res, next){
 
