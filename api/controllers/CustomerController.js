@@ -16,7 +16,6 @@ module.exports = {
         }
     catch(err){
 		res.end('invalid details entered');
-			//return new Error(err);
     };
   },
 
@@ -24,7 +23,6 @@ module.exports = {
 
 		try {
 		Customer.findOne(req.param('id'), function(err, person){
-				// if (person === undefined) return res.notFound();
         	if (err) return Error(err);
 			else{
 				var first = (person.first_name);
@@ -33,10 +31,8 @@ module.exports = {
 					chunk.on('data', (jokeReturned) =>{
 					res.end(JSON.parse(jokeReturned)['value'].joke);
 					})
-					
 				});
 			}
-
 		})
 		} catch (err) {
 			return new Error(err);
