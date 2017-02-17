@@ -1,5 +1,7 @@
 #!/bin/bash
 
+curl -X "POST" -d "id=3&first_name=me&last_name=pu&birth_date=1996-10-15" localhost:1337/customer/create
+
 #find and display one customer
 echo "__________"
 echo "displaying one"
@@ -41,7 +43,7 @@ echo "__________"
 echo "deleting a customer record"
 curl -X "DELETE" localhost:1337/customer/?id=3
 
-#confirming delete 
+#confirming delete
 echo " "
 echo "__________"
 echo "checking for deleted customer"
@@ -57,19 +59,19 @@ curl -X "DELETE" localhost:1337/customer/?id=24
 echo " "
 echo "__________"
 echo "CREATING RECORD"
-curl localhost:1337/customer/create?id=3&first_name=suli&last_name=ade&birth_date=1999-03-29
+curl -X "POST" -d "id=3&first_name=suli&last_name=ade&birth_date=1999-03-29" localhost:1337/customer/create
 
 #create using an existing id should not be possible
 echo " "
 echo "__________"
 echo "attempting to overwrite a customer"
-curl localhost:1337/customer/create?id=2&first_name=me&last_name=pu&birth_date=1996-10-15
+curl -X "POST" -d "id=2&first_name=me&last_name=pu&birth_date=1996-10-15" localhost:1337/customer/create
 
 #telling a joke
 echo " "
 echo "__________"
 echo "a joke for you"
-curl localhost:1337/customer/joke/?id=4
+curl localhost:1337/customer/joker/?id=4
 
 #sort by id (default is ascending order)
 echo " "
