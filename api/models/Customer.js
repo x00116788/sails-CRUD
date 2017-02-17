@@ -14,7 +14,8 @@ module.exports = {
                 required: true},
     last_name: {type:'STRING',
               required: true},
-    birth_date: {type: 'STRING',
+    birth_date: {type: 'INTEGER',
+                type: 'date',
                 required: true}
   }
 };
