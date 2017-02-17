@@ -41,7 +41,7 @@ echo "__________"
 echo "deleting a customer record"
 curl -X "DELETE" localhost:1337/customer/?id=3
 
-#confirming delete
+#confirming delete 
 echo " "
 echo "__________"
 echo "checking for deleted customer"
