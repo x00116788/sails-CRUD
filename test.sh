@@ -80,7 +80,7 @@ curl localhost:1337/customer/?sort=id
 #sort by id in descending order
 echo " "
 echo "__________"
-echo "sorting by id in ascending order"
+echo "sorting by id in descending order"
 curl localhost:1337/customer/?sort=id%20DESC
 
 #sort by first_name
