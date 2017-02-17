@@ -27,9 +27,7 @@ curl -X PUT -d "first_name=susu" localhost:1337/customer/6
 echo " "
 echo "__________"
 echo "checking for updated customer"
-<<<<<<< HEAD
-=======
->>>>>>> 8915627d582e03fec65e304b063828f3d66042c6
+curl localhost:1337/customer/?id=6
 
 #update a non existing customer should not be possible
 echo " "
