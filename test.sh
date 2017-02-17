@@ -1,4 +1,4 @@
-echo#!/bin/bash
+#!/bin/bash
 
 #find and display one customer
 echo "__________"
@@ -21,13 +21,13 @@ curl localhost:1337/customer
 echo " "
 echo "__________"
 echo "updating a customer"
-curl -X PUT -d "first_name=susu" localhost:1337/customer/3
+curl -X PUT -d "first_name=susu" localhost:1337/customer/6
 
 #confirming update
 echo " "
 echo "__________"
-echo "checking for deleted customer"
-curl localhost:1337/customer/?id=3
+echo "checking for updated customer"
+curl localhost:1337/customer/?id=6
 
 #update a non existing customer should not be possible
 echo " "
@@ -57,19 +57,19 @@ curl -X "DELETE" localhost:1337/customer/?id=24
 echo " "
 echo "__________"
 echo "CREATING RECORD"
-curllocalhost:1337/customer/create?id=6&first_name=me&last_name=yppu&birth_date=1996-10-15
+curl localhost:1337/customer/create?id=3&first_name=suli&last_name=ade&birth_date=1999-03-29
 
 #create using an existing id should not be possible
 echo " "
 echo "__________"
 echo "attempting to overwrite a customer"
-curllocalhost:1337/customer/create?id=2&first_name=me&last_name=pu&birth_date=1996-10-15
+curl localhost:1337/customer/create?id=2&first_name=me&last_name=pu&birth_date=1996-10-15
 
 #telling a joke
 echo " "
 echo "__________"
 echo "a joke for you"
-curl localhost:1337/customer/joke/?id=3
+curl localhost:1337/customer/joke/?id=4
 
 #sort by id (default is ascending order)
 echo " "
