@@ -26,7 +26,7 @@ curl -X PUT -d "first_name=susu" localhost:1337/customer/3
 #confirming update
 echo " "
 echo "__________"
-echo "checking for deleted customer"
+echo "checking for updated customer"
 curl localhost:1337/customer/?id=3
 
 #update a non existing customer should not be possible
