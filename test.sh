@@ -27,7 +27,9 @@ curl -X PUT -d "first_name=susu" localhost:1337/customer/6
 echo " "
 echo "__________"
 echo "checking for updated customer"
-curl localhost:1337/customer/?id=6
+<<<<<<< HEAD
+=======
+>>>>>>> 8915627d582e03fec65e304b063828f3d66042c6
 
 #update a non existing customer should not be possible
 echo " "
@@ -80,7 +82,7 @@ curl localhost:1337/customer/?sort=id
 #sort by id in descending order
 echo " "
 echo "__________"
-echo "sorting by id in ascending order"
+echo "sorting by id in descending order"
 curl localhost:1337/customer/?sort=id%20DESC
 
 #sort by first_name
