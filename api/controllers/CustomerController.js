@@ -10,7 +10,12 @@ module.exports = {
 	create: function (req, res) {
         try{
             Customer.create(req.allParams(),function(err,person){
-							res.json('created sucessfully ' + person.first_name);
+							if (!person){
+						res.send(404, ' Not Found');
+					}else{
+						res.json('created sucessfully ' + person.first_name);
+					}
+							
 						});
         }
     catch(err){
@@ -23,13 +28,20 @@ module.exports = {
 		var id = req.param('id');
 		options = _.merge({}, req.params.all(), req.body);
 		try{
-				Customer.update(id,options, function(err, person){
-					if (person.length === 0){
-						res.send(404, ' Not Found');
+				Customer.findOne(id, function (e,found){
+					if (found){
+						Customer.update(id,options, function(err, person){
+							if (!person){
+							res.send(' Failed');
+							}else{
+								res.json(person);		
+							}
+						if (err) return new Error(err);
+       		 });
+					}else{
+							res.send(404, ' No Customer Found ')
 					}
-				if (err) return new Error(err);
-				res.json(person);					
-        });
+				})				
 		}
     catch(err){
 		res.end('An error occured');
@@ -41,7 +53,7 @@ module.exports = {
 		try {
 		Customer.findOne(req.param('id'), function(err, person){
         	if (!person) {
-						res.send(404, ' Not Found ')
+						res.send(404, ' No Customer Found ')
 					}
 			else{
 			JokerService.joker(person).then(res.end); 
