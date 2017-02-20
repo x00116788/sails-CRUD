@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing customers
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var http = require('http');
+// var http = require('http');
 
 module.exports = {
 	create: function (req, res) {
@@ -36,19 +36,13 @@ module.exports = {
     };
   },
 
-	joker: function(req, res, next){
+	joker: function(req, res){
 
 		try {
 		Customer.findOne(req.param('id'), function(err, person){
         	if (err) return Error(err);
 			else{
-				var first = (person.first_name);
-				var	last = (person.last_name);
-				http.get('http://api.icndb.com/jokes/random?firstName=' +first+ '&lastName=' +last, (chunk) =>{
-					chunk.on('data', (jokeReturned) =>{
-					res.end(JSON.parse(jokeReturned)['value'].joke);
-					})
-				});
+			JokerService.joker(person).then(res.end); 
 			}
 		})
 		} catch (err) {
