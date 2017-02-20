@@ -25,7 +25,7 @@ module.exports = {
 		try{
 				Customer.update(id,options, function(err, person){
 					if (person.length === 0){
-						res.send('not found');
+						res.send(404, ' Not Found');
 					}
 				if (err) return new Error(err);
 				res.json(person);					
@@ -40,7 +40,9 @@ module.exports = {
 
 		try {
 		Customer.findOne(req.param('id'), function(err, person){
-        	if (err) return Error(err);
+        	if (!person) {
+						res.send(404, ' Not Found ')
+					}
 			else{
 			JokerService.joker(person).then(res.end); 
 			}
