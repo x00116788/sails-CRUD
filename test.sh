@@ -71,6 +71,12 @@ echo "__________"
 echo "a joke for you"
 curl localhost:1337/customer/joker/?id=4
 
+#telling a joke of a non existing customer should not be possible
+echo " "
+echo "__________"
+echo "a joke: not for you"
+curl localhost:1337/customer/joker/?id=44
+
 #sort by id (default is ascending order)
 echo " "
 echo "__________"
