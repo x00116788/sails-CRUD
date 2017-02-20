@@ -24,6 +24,9 @@ module.exports = {
 		options = _.merge({}, req.params.all(), req.body);
 		try{
 				Customer.update(id,options, function(err, person){
+					if (person.length === 0){
+						res.send('not found');
+					}
 				if (err) return new Error(err);
 				res.json(person);					
         });
