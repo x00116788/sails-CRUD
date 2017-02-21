@@ -11,7 +11,7 @@ module.exports = {
         try{
             Customer.create(req.allParams(),function(err,person){
 							if (!person){
-						res.send(404, ' Not Found');
+						res.send(404, ' invalid input/s');
 					}else{
 						res.json('created sucessfully ' + person.first_name);
 					}

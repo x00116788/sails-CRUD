@@ -1,7 +1,8 @@
+var request = require('supertest');
 
-var chai = require('chai');
-var nock = require('nock');
-var request = require('request');
+// var chai = require('chai');
+// var nock = require('nock');
+// var request = require('request');
 
 // it('joker() should resolve with an object containing a joke', function(done){
 //     nock('http://localhost:1337/customer/joker/?id=6')

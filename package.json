@@ -23,6 +23,7 @@
     "request": "^2.79.0",
     "sails": "~0.12.11",
     "sails-disk": "~0.10.9",
+    "supertest": "^3.0.0",
     "waterline-sqlite3": "^1.0.3"
   },
   "scripts": {
