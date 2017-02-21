@@ -25,7 +25,8 @@ describe("joker service", function(){
             'send': send
            
         })
-        console.log(prom);
+        console.log(prom)
+        done();
         /*
         var Sails = require('sails');
 var sinon = require('sinon'); // Mocking/stubbing/spying
