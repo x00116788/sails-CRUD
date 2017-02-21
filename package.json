@@ -39,6 +39,7 @@
   "license": "",
   "devDependencies": {
     "chai": "^3.5.0",
-    "nock": "^9.0.6"
+    "nock": "^9.0.6",
+    "sinon": "^1.17.7"
   }
 }

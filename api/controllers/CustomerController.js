@@ -52,11 +52,11 @@ module.exports = {
 
 		try {
 		Customer.findOne(req.param('id'), function(err, person){
-        	if (!person) {
-						res.send(404, ' No Customer Found ')
+        	if (person) {
+							JokerService.joker(person).then(res.end); 
 					}
 			else{
-			JokerService.joker(person).then(res.end); 
+							res.send(404, ' No Customer Found ddyyd ')
 			}
 		})
 		} catch (err) {
