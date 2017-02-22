@@ -50,16 +50,21 @@ module.exports = {
 
 	joker: function(req, res){
 
-		try {
-		Customer.findOne(req.param('id'), function(err, person){
-        	if (person) {
-							JokerService.joker(person).then(res.end); 
-					}
-			else{
-							res.send(404, ' No Customer Found ddyyd ')
-			}
-		})
-		} catch (err) {
+	 try {
+			Customer.findOne(req.param('id'), function(err, person){
+        if (person == null)res.send(404, 'No Customer Found');
+				JokerService.joker(person).then((joke_obj) => {
+					 var parsedJoke = 	JSON.parse(joke_obj)['value'].joke;
+					var	customer_joke = parsedJoke.replace('Chuck Norris', person.first_name + " " + person.last_name);
+          return res.json(customer_joke); 
+	
+				}).catch((error) => {
+								console.log(error)
+								return res.json(error);
+					 });
+			})
+		}
+	 catch (err) {
 			return new Error(err);
 		};
 	},
