@@ -1,97 +1,42 @@
 
 var url = 'localhost:1337/',
-//app = require('sails'),
 request = require('supertest')(url),
-sinon = require('sinon'),
-assert = require('assert');
+sinon = require('sinon');
+const expect = require('chai').expect;
 
-describe("joker service", function(){
+describe("CustomerController joker", function(){
+  const person = {first_name:'u',
+                last_name:'me',
+                birth_date: 19991010},
+        joke1 = {'type': 'success',
+                'value':{'id': 42,
+                        'joke': 'Chuck Norris programs occupy 150% of CPU, even when they are not executing.', 
+                        'categories': ['nerdy'] }
+    } ;
     before(function() {
-      // Mocking our service
-      sinon.stub(JokerService, 'joker', function(pers) {
-        return 'Laugh if u get this '+ pers.first_name + ' ' + pers.last_name;
+      var stub;
+      stub = sinon.stub(CustomerController, 'joker', function(pers) {
+    		 var parsedJoke = 	JSON.parse(joke1)['value'].joke;
+         var	customer_joke = parsedJoke.replace('Chuck Norris', pers.first_name + " " + pers.last_name);
+         return customer_joke;
+        done()
       });
     });
 
     after(function() {
-      // Restores our mock to the original service
-      JokerService.joker.restore();
+      stub.restore();
     });
+
     it("give a joke to customer", function(done){
         var person = {first_name:'u',
                         last_name:'me'};
         var send = sinon.spy();
-     var prom = JokerService.joker(person, {
+     var prom = CustomerController.joker(person, {
             'send': send
            
         })
-        console.log(prom)
+        expect(prom).to.eql('u me programs occupy 150% of CPU, even when they are not executing.');
         done();
-        /*
-        var Sails = require('sails');
-var sinon = require('sinon'); // Mocking/stubbing/spying
-var assert = require('chai').assert; // Assertions
-var nock = require('nock'); // HTTP Request Mocking
-
-describe('Joke Service',function(){
-  var app;
-  before(function(){
-        var mockJoke = {
-          "type": "success",
-          "value": {
-            "id": 513,
-            "joke": "David Kiarie does not code in cycles, he codes in strikes.",
-            "categories": [
-              "nerdy"
-            ]
-          }
-        };
-
-    JokeService = nock()
-      .get()
-      .reply(200, mockJoke);
-  });
-
-  it('Should retrieve the joke and parse the data.', function(){
-    var service = new JokeService();
-    service.getJoke(){
-      
-    }
-  })
-});*/
-
-        // var req = request.get("customer/joker/?id=2")
-        // // req.send({
-        // //     data:{
-        // //         id:2
-        // //     }
-        // // })
-        // //.expect(200)
-
-        // req.end(function(err,res){
-        //     if(err){
-        //         throw err;
-        //     }
-        //     console.log(res.text+'here');
-        //     done();
-        // })
-    })//,
-    // it("update a customer", function(done){
-    //     var req = request.put("crud/update/customer");
-    //     req.send({
-    //         find:{
-    //             id:2
-    //         },
-    //         data:{
-    //             first_name:"first 2"
-    //         }
-    //     })
-    //     req.end(function(err,res){
-    //         if(err){
-    //             throw err;
-    //         }
-    //         console.log(res.text);
-    //         done();
-    //     })
-    // })
+    })
+       
 })
