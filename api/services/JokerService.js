@@ -1,13 +1,13 @@
 
 var http = require('http');
 module.exports = {   
-  joker: function jokerService(option, done) {          
+  joker: function jokerService() {          
     
     return promise = new Promise(function (fulfill, reject) {
         try{
-           http.get('http://api.icndb.com/jokes/random?firstName=' +option.first_name+ '&lastName=' +option.last_name, (chunk) =>{
+           http.get('http://api.icndb.com/jokes/random', (chunk) =>{
           chunk.on('data', (jokeReturned) =>{
-               fulfill((JSON.parse(jokeReturned)['value'].joke));
+               fulfill(jokeReturned);
            })
     	}) 
 
