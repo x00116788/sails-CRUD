@@ -1,23 +1,29 @@
-var url = 'localhost:1337/',
-request = require('supertest')(url),
-sinon = require('sinon');
+'use strict';
+let url = 'localhost:1337/',
+    request = require('supertest')(url),
+    nock = require('nock'),
+    sinon = require('sinon');
 const expect = require('chai').expect;
 
 describe("joker service", function(){
    const joke1 = {'type': 'success',
         'value':{'id': 42,
-             'joke': ' programs occupy 150% of CPU, even when they are not executing.', 
+             'joke': 'Chuck Norris programs occupy 150% of CPU, even when they are not executing.', 
              'categories': ['nerdy'] }
     } ;
     
     before(function() {
         
       sinon.stub(JokerService, 'joker', function() {
-        var customer_joke = (joke1)['value'].joke;
-
-        return  joke1;        
-        done()
-      });
+          let joke1Promise = new Promise (function (resolve, reject) {
+              nock('http://api.icndb.com/jokes/random')
+              .get('/request')
+              .reply(200, {joke1}).then(
+            resolve(joke1));
+          });
+          return joke1Promise;
+     })        
+          
     });
 
     after(function() {
@@ -25,21 +31,18 @@ describe("joker service", function(){
     });
 
     it('Fetch a joke object', function(done){
-        
-        var send = sinon.spy();
-        var prom = JokerService.joker( {
-            'send': send           
-        });
-        expect(prom).to.eql({
+        JokerService.joker().then((result) => {
+        expect(result).to.eql({
             'type': 'success',
             'value':{
                 'id': 42,
-                'joke': ' programs occupy 150% of CPU, even when they are not executing.', 
+                'joke': 'Chuck Norris programs occupy 150% of CPU, even when they are not executing.', 
                 'categories': [
                     'nerdy'
                     ]
             }
             });
         done();
+    })
     })
 })
