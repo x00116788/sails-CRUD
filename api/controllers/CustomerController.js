@@ -13,7 +13,7 @@ module.exports = {
 							if (!person){
 						res.send(404, ' invalid input/s');
 					}else{
-						res.json('created sucessfully ' + person.first_name);
+						res.json(person.first_name + ' created sucessfully' );
 					}
 							
 						});
@@ -49,24 +49,13 @@ module.exports = {
   },
 
 	joker: function(req, res){
-
-	 try {
-			Customer.findOne(req.param('id'), function(err, person){
-        if (person == null)res.send(404, 'No Customer Found');
-				JokerService.joker(person).then((joke_obj) => {
-					 var parsedJoke = 	JSON.parse(joke_obj)['value'].joke;
-					var	customer_joke = parsedJoke.replace('Chuck Norris', person.first_name + " " + person.last_name);
-          return res.json(customer_joke); 
-	
-				}).catch((error) => {
-								console.log(error)
-								return res.json(error);
-					 });
-			})
+		try{
+			JokerService.getJoker(req.param('id'))
+			.then(res.end).catch(console.log);
+		}catch(err){
+			console.log(err);
 		}
-	 catch (err) {
-			return new Error(err);
-		};
+		
 	},
 
   delete: function(req, res){
