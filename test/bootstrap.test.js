@@ -1,13 +1,14 @@
-
 var sails = require('sails');
 
-before(function(done) {
+before("aeae", function(done) {
+  // Increase the Mocha timeout so that Sails has enough time to lift.
+  this.timeout(5000);
+
   sails.lift({
     // configuration for testing purposes
-  }, function(err, sails) {
+  }, function(err) {
     if (err) return done(err);
     // here you can load fixtures, etc.
-    var app = sails;
     done(err, sails);
   });
 });

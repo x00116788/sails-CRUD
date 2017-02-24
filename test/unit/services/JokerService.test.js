@@ -50,5 +50,4 @@ describe("joker service", function(){
         }).catch(done);
     })
 
-})
- 
+}) 

@@ -13,7 +13,7 @@ module.exports = {
 							if (!person){
 						res.send(404, ' invalid input/s');
 					}else{
-						res.json(person.first_name + ' created sucessfully' );
+						res.json(person);
 					}
 							
 						});

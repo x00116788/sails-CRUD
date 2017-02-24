@@ -28,7 +28,9 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
+
   },
   "main": "app.js",
   "repository": {
@@ -38,6 +40,8 @@
   "author": "suliat",
   "license": "",
   "devDependencies": {
+    "supertest": "^0.14.0",
+    "mocha": "^2.0.1",
     "chai": "^3.5.0",
     "nock": "^9.0.6",
     "sinon": "^1.17.7"

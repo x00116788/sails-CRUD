@@ -36,7 +36,7 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /customer/joker:id': 'CustomerController.joker'
+  'get /customer/joker/:id': 'CustomerController.joker'
 /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
