@@ -6,7 +6,6 @@ describe('customer Controller', function(){
         request(sails.hooks.http.app)
         .post('/customer')
         .send({
-            id: 22,
             first_name: "ASHUAHSUHAUS",
             last_name: "AIOEJHIUAEHUIHAEUIAE",
             birth_date: "1970-01-01T00:00:00.000Z"
@@ -14,8 +13,6 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
-             console.log(res.body, res.statusCode);
-
              done();
          }).expect(200);
     }),
@@ -29,8 +26,6 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
-             console.log(res.body, res.statusCode);
-
              done();
          }).expect(200);
     }),
@@ -43,7 +38,6 @@ describe('customer Controller', function(){
             if(err){
                 throw err;
             }
-            console.log(res.text, res.statusCode);
             done();
         }).expect(200);
     }),
