@@ -19,7 +19,7 @@ describe('customer Controller', function(){
 
     it('update a customer', function(done){
         request(sails.hooks.http.app)
-        .put('/customer/22')
+        .put('/customer/1')
         .send({            
                 first_name:"first"
         }).end(function(err,res){
@@ -33,7 +33,7 @@ describe('customer Controller', function(){
 
     it('give a joke to customer', function(done){
         request(sails.hooks.http.app)
-        .get('/customer/joker/22')
+        .get('/customer/joker/1')
         .end(function(err,res){
             if(err){
                 throw err;
@@ -44,7 +44,7 @@ describe('customer Controller', function(){
 
     it('delete customer with given id', function(done){
         request(sails.hooks.http.app)
-        .del('/customer/22')
+        .del('/customer/1')
         .end(function(err,res){
              if(err){
                  done(err);
