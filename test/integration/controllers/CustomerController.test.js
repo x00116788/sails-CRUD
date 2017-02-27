@@ -38,7 +38,7 @@ describe('customer Controller', function(){
 
     it('give a joke to customer', function(done){
         request(sails.hooks.http.app)
-        .get('/customer/joker/1')
+        .get('/customer/joker/22')
         .end(function(err,res){
             if(err){
                 throw err;
