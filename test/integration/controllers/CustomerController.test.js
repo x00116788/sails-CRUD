@@ -19,6 +19,7 @@ describe('customer Controller', function(){
              done();
          }).expect(200);
     }),
+
     it('update a customer', function(done){
         request(sails.hooks.http.app)
         .put('/customer/22')
@@ -32,7 +33,20 @@ describe('customer Controller', function(){
 
              done();
          }).expect(200);
-    })
+    }),
+
+
+    it('give a joke to customer', function(done){
+        request(sails.hooks.http.app)
+        .get('/customer/joker/1')
+        .end(function(err,res){
+            if(err){
+                throw err;
+            }
+            console.log(res.text, res.statusCode);
+            done();
+        }).expect(200);
+    }),
 
     it('delete customer with given id', function(done){
         request(sails.hooks.http.app)
@@ -45,19 +59,6 @@ describe('customer Controller', function(){
 
              done();
          }).expect(200);
-    })
-
-    it('give a joke to customer', function(done){
-        request(sails.hooks.http.app)
-        .get('/customer/joker/1')
-        .end(function(err,res){
-            if(err){
-                throw err;
-            }
-            expect(200);
-            console.log(res.text, res.statusCode);
-            done();
-        })
     })
 
 })
