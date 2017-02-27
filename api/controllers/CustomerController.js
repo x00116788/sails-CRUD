@@ -50,6 +50,9 @@ module.exports = {
 
 	joker: function(req, res){
 		try{
+			// if(req.param('id') === null || req.param){
+			// 	console.log('no id specified');
+			// }
 			JokerService.getJoker(req.param('id'))
 			.then(res.end).catch(console.log);
 		}catch(err){

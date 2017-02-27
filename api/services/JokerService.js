@@ -1,16 +1,20 @@
 'use strict';
 let http = require('http');
 module.exports = { 
-
+   
     getJoker: function(id){
+
         let jokePromise = new Promise( (fulfill,reject) => {
             try {
                 this.getOne(id).then((retOne) =>{
                     return this.joker()
                         .then((joke_obj) =>{
-                            let parsedJoke = joke_obj['value'].joke;
-                            let	customer_joke = parsedJoke.replace('Chuck Norris', retOne.first_name + " " + retOne.last_name);
-                            fulfill(customer_joke);
+                            let parsedJoke = joke_obj['value'].joke.replace('Chuck Norris', retOne.first_name + " " + retOne.last_name);;
+                            let customer_joke = {"Customer":retOne,
+                                                "joke":parsedJoke
+                            };
+                            fulfill(JSON.stringify(customer_joke));
+
                         })
                         .catch(reject); 
                 })
