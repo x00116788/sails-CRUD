@@ -30,16 +30,18 @@ describe('customer Controller', function(){
          }).expect(200);
     }),
 
-
     it('give a joke to customer', function(done){
         request(sails.hooks.http.app)
         .get('/customer/joker/1')
         .end(function(err,res){
+            console.log(res.body);
             if(err){
                 throw err;
             }
+            expect(res.body).to.be.an('object');
+            expect(res.text).to.include('joke', 'Customer', 'id', 'first_name', 'last_name');
             done();
-        }).expect(200);
+        })
     }),
 
     it('delete customer with given id', function(done){
@@ -49,8 +51,6 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
-             console.log(res.body, res.statusCode);
-
              done();
          }).expect(200);
     })

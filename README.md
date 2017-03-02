@@ -74,6 +74,6 @@ $ npm install mocha -g
 to run test:  
 $ npm test
 
-alternatively u can use the test.sh 
+Alternatively u can use the test.sh 
 in the root of the directory run:
 $ bash test.sh
