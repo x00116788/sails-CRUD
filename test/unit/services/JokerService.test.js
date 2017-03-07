@@ -4,7 +4,7 @@ let url = 'localhost:1337/',
     nock = require('nock'),
     sinon = require('sinon');
 const expect = require('chai').expect,
-     customer = {id: 2,
+     test_customer = {id: 2,
                  first_name: "susu",
                  last_name: "suli",
                  birth_date: 19700101                  
@@ -13,7 +13,7 @@ const expect = require('chai').expect,
 
           joke1 = {'type': 'success',
                   'value':{'id': 42,
-                          'joke': 'Chuck Norris programs occupy 150% of CPU, even when they are not executing.', 
+                          'joke': 'susu suli programs occupy 150% of CPU, even when they are not executing.', 
                           'categories': ['nerdy'] }
         } ;
     
@@ -26,12 +26,12 @@ describe("joker service", function(){
              resolve(joke1);
          });
          return joke1Promise;
-     });
+     });    
           
      sinon.stub(JokerService, 'getOne', function(id){
          let customerOne = new Promise(function(res,rej){
 
-             res(customer)
+             res(test_customer)
          });
          return customerOne;
      });
@@ -45,7 +45,7 @@ describe("joker service", function(){
 
     it('Expect a customer joke', function(done){
         JokerService.getJoker(id).then((result) => {
-            expect(result).to.eql('susu suli programs occupy 150% of CPU, even when they are not executing.')
+            expect(result).to.include('joke', 'customer')
             done();
         }).catch(done);
     })

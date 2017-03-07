@@ -7,18 +7,20 @@ module.exports = {
         let jokePromise = new Promise( (fulfill,reject) => {
             try {
                 this.getOne(id).then((retOne) =>{
-                    return this.joker()
+                    if (retOne === '404, No Customer Found'){
+                        reject(retOne);
+                    }
+                    this.joker(retOne.first_name,retOne.last_name)
                         .then((joke_obj) =>{
-                            let parsedJoke = joke_obj['value'].joke.replace('Chuck Norris', retOne.first_name + " " + retOne.last_name);;
                             let customer_joke = {"Customer":retOne,
-                                                "joke":parsedJoke
+                                                "joke":joke_obj['value'].joke
                             };
                             fulfill(JSON.stringify(customer_joke));
-
                         })
-                        .catch(reject); 
-                })
-               
+                         
+                }).catch((no_one) =>{
+                    reject(no_one);
+                });              
             }
             catch (err) {
                 console.log(err);
@@ -27,11 +29,11 @@ module.exports = {
         return jokePromise;
     },
 
-    joker: function(){      
+    joker: function(first,last){      
         
         let promise = new Promise( (fulfill, reject) => {
             try{
-            http.get('http://api.icndb.com/jokes/random', (chunk) =>{
+                http.get('http://api.icndb.com/jokes/random/?firstName=' + first + '&lastName=' + last, (chunk) =>{
             
                     chunk.on('data', (jokeReturned) =>{
                         fulfill(JSON.parse(jokeReturned));
@@ -52,12 +54,9 @@ module.exports = {
                     }
                  else{
                     rej('404, No Customer Found');
-                }
-            })
-            
-        })
+                };
+            });
+        });
         return onePromise;
     }
-
 };
-

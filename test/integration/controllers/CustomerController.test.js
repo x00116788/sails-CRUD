@@ -1,10 +1,12 @@
-var request = require('supertest');
+'use strict';
 const expect = require('chai').expect;
+let request = require('supertest'),
+    test_id;
 
 describe('customer Controller', function(){
     it('create new customer', function(done){
         request(sails.hooks.http.app)
-        .post('/customer')
+        .post('/customer/')
         .send({
             first_name: "ASHUAHSUHAUS",
             last_name: "AIOEJHIUAEHUIHAEUIAE",
@@ -13,28 +15,35 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
+             test_id= res.body['id'];
+             expect(res.statusCode).to.eql(200);
+             expect(res.text).to.include('id', 'first_name', 'last_name');             
              done();
-         }).expect(200);
+         })
     }),
 
     it('update a customer', function(done){
         request(sails.hooks.http.app)
-        .put('/customer/1')
+        .put('/customer/' + test_id)
         .send({            
                 first_name:"first"
         }).end(function(err,res){
              if(err){
                  done(err);
              }
+        let updated = res.body;
+        console.log(updated.first_name);
+           //console.log(JSON.stringify(res.body["first_name"]));
+           // expect(res.body["first_name"]).to.eql('first'); 
              done();
          }).expect(200);
     }),
 
     it('give a joke to customer', function(done){
         request(sails.hooks.http.app)
-        .get('/customer/joker/1')
+        .get('/customer/joker/' + test_id)
         .end(function(err,res){
-            console.log(res.body);
+           // console.log(res.body);
             if(err){
                 throw err;
             }
@@ -46,11 +55,12 @@ describe('customer Controller', function(){
 
     it('delete customer with given id', function(done){
         request(sails.hooks.http.app)
-        .del('/customer/1')
+        .del('/customer/' + test_id)
         .end(function(err,res){
              if(err){
                  done(err);
              }
+             //console.log(res.body);
              done();
          }).expect(200);
     })

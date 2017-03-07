@@ -15,7 +15,6 @@ module.exports = {
 					}else{
 						res.json(person);
 					}
-							
 						});
         }
     catch(err){
@@ -53,31 +52,20 @@ module.exports = {
 			if(req.param('id')){
 				JokerService.getJoker(req.param('id'))
 				.then((joker) =>{
-					res.json(JSON.parse(joker));
-				}).catch(console.log);
+					res.json(201, JSON.parse(joker));
+				})
+				.catch((non) => {
+				res.json(404,{error: 'id ' + req.param('id') + ' does not exist'})
+				});
 			}
 			else{
-				console.log(nononon);
-				res.json(404, {});			
+				res.json(400, 'No Customer ID entered');			
 			}
 		}catch(err){
-			console.log(err);
-		}
-		
-	},
 
-  delete: function(req, res){
-	var id = req.param('id', null);
-		try{
-				Customer.findOne(id).done(function(err, person){
-						person.destroy();
-						res.end('customer ' + id + 'deleted');
-				})
+			console.log('err' + err);
+		}
 
 	}
-	catch(err){
-		return new Error(err);
-	};
-  }   
 
 };
