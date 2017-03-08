@@ -1,7 +1,8 @@
 'use strict';
 const expect = require('chai').expect;
 let request = require('supertest'),
-    test_id;
+    test_id,
+    updated;
 
 describe('customer Controller', function(){
     it('create new customer', function(done){
@@ -17,7 +18,8 @@ describe('customer Controller', function(){
              }
              test_id= res.body['id'];
              expect(res.statusCode).to.eql(200);
-             expect(res.text).to.include('id', 'first_name', 'last_name');             
+             expect(res.text).to.include('id', 'first_name', 'last_name', 'birth_date', 'createdAt', 'updatedAt');             
+             expect(res.body['id']).to.eql(test_id);
              done();
          })
     }),
@@ -31,10 +33,8 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
-        let updated = res.body;
-        console.log(updated.first_name);
-           //console.log(JSON.stringify(res.body["first_name"]));
-           // expect(res.body["first_name"]).to.eql('first'); 
+             expect(res.body['id']).to.eql(test_id);
+             expect(res.body["first_name"]).to.eql('first'); 
              done();
          }).expect(200);
     }),
@@ -43,10 +43,10 @@ describe('customer Controller', function(){
         request(sails.hooks.http.app)
         .get('/customer/joker/' + test_id)
         .end(function(err,res){
-           // console.log(res.body);
             if(err){
                 throw err;
             }
+            expect(res.body.Customer.id).to.eql(test_id); 
             expect(res.body).to.be.an('object');
             expect(res.text).to.include('joke', 'Customer', 'id', 'first_name', 'last_name');
             done();
@@ -60,9 +60,22 @@ describe('customer Controller', function(){
              if(err){
                  done(err);
              }
-             //console.log(res.body);
+             expect(res.text).to.include('id', 'first_name', 'last_name', 'birth_date', 'createdAt', 'updatedAt');             
+             expect(res.body['id']).to.eql(test_id);
              done();
          }).expect(200);
+    }),
+
+    it('confirm deleted customer does not exist', function(done){
+        request(sails.hooks.http.app)
+        .get('/customer/' + test_id)
+        .end(function(err,res){
+            if(err){
+                throw err;
+            }
+            expect(res.text).to.eql('No record found with the specified `id`.');
+            done();
+        }).expect(404);
     })
 
 })

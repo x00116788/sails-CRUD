@@ -22,31 +22,6 @@ module.exports = {
     };
   },
 
-	update: function (req, res){
-		var options = {};
-		var id = req.param('id');
-		options = _.merge({}, req.params.all(), req.body);
-		try{
-				Customer.findOne(id, function (e,found){
-					if (found){
-						Customer.update(id,options, function(err, person){
-							if (!person){
-							res.send(' Failed');
-							}else{
-								res.json(person);		
-							}
-						if (err) return new Error(err);
-       		 });
-					}else{
-							res.send(404, ' No Customer Found ')
-					}
-				})				
-		}
-    catch(err){
-		res.end('An error occured');
-    };
-  },
-
 	joker: function(req, res){
 		try{
 			if(req.param('id')){
